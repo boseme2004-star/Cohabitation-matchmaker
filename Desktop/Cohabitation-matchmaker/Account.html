@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Account</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav>
+    <h1>Cohabify</h1>
+    <div>
+      <a href="index.html">About</a>
+      <a href="account.html">Account</a>
+      <a href="profile.html">Profile</a>
+    </div>
+  </nav>
+
+  <section class="container">
+    <h2>Create Account</h2>
+
+    <form id="accountForm">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit" class="btn">Save Account</button>
+    </form>
+
+    <p id="status"></p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
