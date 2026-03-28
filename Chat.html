@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chat Screen</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:system-ui,sans-serif;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Container */
+.chat-container{
+  width:360px;
+  height:600px;
+  background:#fff;
+  border-radius:25px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 20px 40px rgba(0,0,0,.2);
+  overflow:hidden;
+}
+
+/* Header */
+.chat-header{
+  padding:15px;
+  background:#667eea;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.avatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#fff;
+  color:#667eea;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+.user-info h3{font-size:16px;}
+.user-info p{font-size:12px;opacity:0.8;}
+
+/* Messages */
+.chat-body{
+  flex:1;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  overflow-y:auto;
+  background:#f5f5f5;
+}
+
+.message{
+  max-width:70%;
+  padding:10px 14px;
+  border-radius:18px;
+  font-size:14px;
+}
+
+.sent{
+  align-self:flex-end;
+  background:#667eea;
+  color:#fff;
+}
+
+.received{
+  align-self:flex-start;
+  background:#e4e6eb;
+}
+
+/* Footer */
+.chat-footer{
+  display:flex;
+  padding:10px;
+  border-top:1px solid #ddd;
+}
+
+.chat-footer input{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:#f0f2f5;
+  outline:none;
+}
+
+.chat-footer button{
+  margin-left:10px;
+  padding:10px 15px;
+  border:none;
+  border-radius:20px;
+  background:#667eea;
+  color:#fff;
+  cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="chat-container">
+
+  <!-- Header -->
+  <div class="chat-header">
+    <div class="avatar">E</div>
+    <div class="user-info">
+      <h3>Emily, 25</h3>
+      <p>Online</p>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  <div class="chat-body">
+    <div class="message received">Hey! Are you still looking for a roommate?</div>
+    <div class="message sent">Hi! Yes I am 😊</div>
+    <div class="message received">Great! What’s your budget?</div>
+    <div class="message sent">Around $500/month</div>
+  </div>
+
+  <!-- Input -->
+  <div class="chat-footer">
+    <input type="text" placeholder="Type a message...">
+    <button>Send</button>
+  </div>
+
+</div>
+
+</body>
+</html>
