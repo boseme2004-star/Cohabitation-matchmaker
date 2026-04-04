@@ -1,61 +1,278 @@
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:system-ui,sans-serif;
-  background:linear-gradient(135deg,#667eea,#764ba2);
-  min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px;
+/* ========================= */
+/* RESET */
+/* ========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.card{
-  background:#fff;max-width:450px;width:100%;
-  border-radius:28px;padding:28px;
-  box-shadow:0 20px 40px rgba(0,0,0,.15);
+/* ========================= */
+/* BODY */
+/* ========================= */
+body {
+  font-family: system-ui, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
 }
 
-.header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;}
-
-.logo{
-  font-size:24px;font-weight:700;
-  background:linear-gradient(135deg,#667eea,#764ba2);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: white;
 }
 
-.match-badge{
-  background:#fff0f0;padding:6px 14px;border-radius:40px;
-  font-size:14px;font-weight:600;color:#e25c6b;
+.navbar a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
 }
 
-.greeting{font-size:26px;font-weight:600;margin-bottom:24px;}
-
-.profile{display:flex;gap:16px;align-items:center;margin-bottom:24px;}
-
-.avatar{
-  width:70px;height:70px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#ffd89b,#c7e9fb);font-size:22px;
+/* ========================= */
+/* HERO (ABOUT PAGE) */
+/* ========================= */
+.hero {
+  height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
 }
 
-.info h2{font-size:22px;margin-bottom:4px;}
-
-.job{background:#f5f5f5;padding:4px 12px;border-radius:20px;font-size:14px;}
-
-.details{
-  background:#f8f9fa;padding:14px 18px;border-radius:20px;
-  display:flex;justify-content:space-between;margin-bottom:28px;
+.hero-content {
+  max-width: 600px;
+  color: white;
 }
 
-.location,.price{display:flex;gap:6px;font-size:14px;}
-
-.preferences h3{
-  font-size:12px;text-transform:uppercase;color:#888;margin-bottom:14px;
+.hero-content h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
 }
 
-.chips{display:flex;flex-wrap:wrap;gap:10px;}
+.hero-content p {
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
 
-.chip{background:#f0f2f5;padding:8px 16px;border-radius:30px;font-size:13px;}
+/* MISSION CARD */
+.mission-card {
+  background: white;
+  color: #333;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
 
-@media(max-width:480px){
-  .card{padding:20px;}
-  .greeting{font-size:22px;}
-  .details{flex-direction:column;}
+/* CTA BUTTON */
+.cta-btn {
+  padding: 12px 25px;
+  border: none;
+  background: #1abc9c;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* ========================= */
+/* MAIN LAYOUT (ACCOUNT PAGE) */
+/* ========================= */
+.main-container {
+  display: flex;
+  height: calc(100vh - 70px);
+}
+
+/* LEFT PANEL */
+.left-panel {
+  width: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* FORM SIDE */
+.form-container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+}
+
+.form-box {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.15);
+}
+
+/* INPUTS */
+.form-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ========================= */
+/* CARD (MATCH PAGE) */
+/* ========================= */
+.card {
+  background: #fff;
+  max-width: 450px;
+  width: 100%;
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.15);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.match-badge {
+  background: #fff0f0;
+  padding: 6px 14px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e25c6b;
+}
+
+.greeting {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.profile {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,#ffd89b,#c7e9fb);
+  font-size: 22px;
+}
+
+.info h2 {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.job {
+  background: #f5f5f5;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.details {
+  background: #f8f9fa;
+  padding: 14px 18px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.location,
+.price {
+  display: flex;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.preferences h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 14px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  background: #f0f2f5;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    width: 100%;
+    height: 30%;
+  }
+
+  .form-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 20px;
+  }
+
+  .greeting {
+    font-size: 22px;
+  }
+
+  .details {
+    flex-direction: column;
+  }
 }
