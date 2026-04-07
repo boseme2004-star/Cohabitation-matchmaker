@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matches - Cohabify</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+  <h1>CoHabify</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="account.html">Account</a>
+    <a href="signup.html">Sign Up</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- PROFILE HEADER -->
+  <div class="card profile-card fade-in">
+    <img src="https://via.placeholder.com/100" alt="Profile Picture">
+    <div>
+      <h2 id="userName">User Name</h2>
+      <p class="badge">Verified User</p>
+      <p id="userLocation">Location</p>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="card fade-in" style="margin-top:20px;">
+    <h3>About Me</h3>
+    <p id="aboutText"></p>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="grid" style="margin-top:20px;">
+
+    <div class="card">
+      <h3>Basic Info</h3>
+      <p><strong>Age:</strong> <span id="age"></span></p>
+      <p><strong>Gender:</strong> <span id="gender"></span></p>
+    </div>
+
+    <div class="card">
+      <h3>Lifestyle</h3>
+      <p><strong>Smoking:</strong> <span id="smoking"></span></p>
+      <p><strong>Pets:</strong> <span id="pets"></span></p>
+      <p><strong>Sleep:</strong> <span id="sleep"></span></p>
+    </div>
+
+    <div class="card">
+      <h3>Preferences</h3>
+      <p><strong>Budget:</strong> <span id="budget"></span></p>
+      <p><strong>Location:</strong> <span id="location"></span></p>
+    </div>
+
+  </div>
+
+  <!-- MATCHES -->
+  <div style="margin-top:30px;">
+    <h2>Suggested Matches</h2>
+
+    <!-- 🔥 IMPORTANT: added id -->
+    <div class="grid" id="matchesContainer"></div>
+
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 CoHabit. All rights reserved.</p>
+</footer>
+
+<script>
+
+// ✅ LOAD CURRENT USER INTO PROFILE
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if (!currentUser) {
+  alert("Please login first");
+  window.location.href = "login.html";
+}
+
+// Fill profile UI
+document.getElementById("userName").textContent =
+  currentUser.firstName + " " + currentUser.lastName;
+
+document.getElementById("userLocation").textContent =
+  currentUser.location || "Not set";
+
+document.getElementById("aboutText").textContent =
+  currentUser.about || "No bio added yet";
+
+document.getElementById("age").textContent = currentUser.age || "-";
+document.getElementById("gender").textContent = currentUser.gender || "-";
+
+document.getElementById("smoking").textContent = currentUser.smoking || "-";
+document.getElementById("pets").textContent = currentUser.pets || "-";
+document.getElementById("sleep").textContent = currentUser.sleep || "-";
+
+document.getElementById("budget").textContent = currentUser.budget || "-";
+document.getElementById("location").textContent = currentUser.location || "-";
+
+
+// ==========================
+// ✅ STEP 3: MATCHING ALGORITHM
+// ==========================
+function findMatches() {
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  let matches = [];
+
+  users.forEach(user => {
+    if (user.email === currentUser.email) return;
+
+    let score = 0;
+
+    if (user.location === currentUser.location) score++;
+    if (user.smoking === currentUser.smoking) score++;
+    if (user.pets === currentUser.pets) score++;
+    if (user.sleep === currentUser.sleep) score++;
+    if (user.budget === currentUser.budget) score++;
+
+    if (score >= 2) { // threshold
+      matches.push({ ...user, score });
+    }
+  });
+
+  matches.sort((a, b) => b.score - a.score);
+
+  displayMatches(matches);
+}
+
+
+// ==========================
+// ✅ STEP 4: DISPLAY MATCHES
+// ==========================
+function displayMatches(matches) {
+  const container = document.getElementById("matchesContainer");
+  container.innerHTML = "";
+
+  if (matches.length === 0) {
+    container.innerHTML = "<p>No matches found yet.</p>";
+    return;
+  }
+
+  matches.forEach(user => {
+    const card = `
+      <div class="card match-card">
+        <img src="https://via.placeholder.com/70">
+        <div class="match-info">
+          <h4>${user.firstName} ${user.lastName}</h4>
+          <p class="match-tags">
+            ${user.smoking || "N/A"} • ${user.pets || "N/A"} • ${user.sleep || "N/A"}
+          </p>
+          <p><strong>Match Score:</strong> ${user.score}/5</p>
+          <button class="btn" onclick="startChat('${user.email}')">
+            Chat
+          </button>
+        </div>
+      </div>
+    `;
+
+    container.innerHTML += card;
+  });
+}
+
+
+// ==========================
+// ✅ STEP 5: AUTO RUN
+// ==========================
+window.onload = function () {
+  findMatches();
+};
+
+
+// ==========================
+// 💬 CHAT NAVIGATION
+// ==========================
+function startChat(email) {
+  localStorage.setItem("chatUser", email);
+  window.location.href = "chat.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,118 +1,169 @@
-// Helpers
-function getUsers() {
-  return JSON.parse(localStorage.getItem("users")) || [];
+/* ==============================
+   Cohabitation Matchmaking Platform
+   Professional & Secure script.js
+   ============================== */
+
+"use strict";
+
+// ==============================
+// Utility Functions
+// ==============================
+
+// Sanitize input (prevent XSS)
+function sanitizeInput(input) {
+  if (typeof input !== "string") return input;
+  const div = document.createElement("div");
+  div.textContent = input;
+  return div.innerHTML.trim();
 }
 
-function saveUsers(users) {
-  localStorage.setItem("users", JSON.stringify(users));
+// Validate Email
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
 }
 
-// Account Save (store multiple users)
-const accountForm = document.getElementById("accountForm");
-if (accountForm) {
-  accountForm.addEventListener("submit", (e) => {
+// Password Strength Check
+function validatePassword(password) {
+  return password.length >= 6;
+}
+
+// ==============================
+// Form Handling
+// ==============================
+
+const signupForm = document.querySelector(".right");
+
+if (signupForm) {
+  signupForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const newUser = {
-      id: Date.now(),
-      name: document.getElementById("name").value,
-      email: document.getElementById("email").value,
-      password: document.getElementById("password").value,
-      preferences: []
-    };
+    const inputs = signupForm.querySelectorAll("input, select");
+    let formData = {};
 
-    const users = getUsers();
-    users.push(newUser);
-    saveUsers(users);
+    inputs.forEach(input => {
+      const key = input.placeholder || input.name;
+      formData[key] = sanitizeInput(input.value);
+    });
 
-    localStorage.setItem("currentUserId", newUser.id);
-    document.getElementById("status").textContent = "Account created!";
+    // Basic validation
+    if (!validateEmail(formData["Enter your email"])) {
+      alert("Invalid email address");
+      return;
+    }
+
+    if (!validatePassword(formData["Create a password"])) {
+      alert("Password must be at least 6 characters");
+      return;
+    }
+
+    console.log("Secure Form Data:", formData);
+    alert("Account created successfully!");
+
+    // Simulate save
+    localStorage.setItem("user", JSON.stringify(formData));
   });
 }
 
-// Load current user
-function getCurrentUser() {
-  const users = getUsers();
-  const id = localStorage.getItem("currentUserId");
-  return users.find(u => u.id == id);
-}
+// ==============================
+// Profile Save (Account Page)
+// ==============================
 
-// Profile Load
-const currentUser = getCurrentUser();
-if (currentUser) {
-  const nameEl = document.getElementById("profileName");
-  const emailEl = document.getElementById("profileEmail");
+const saveBtn = document.querySelector(".btn");
 
-  if (nameEl) nameEl.textContent = currentUser.name;
-  if (emailEl) emailEl.textContent = currentUser.email;
-}
+if (saveBtn) {
+  saveBtn.addEventListener("click", () => {
+    const inputs = document.querySelectorAll("input, select");
+    let profile = {};
 
-// Save Preferences
-const profileForm = document.getElementById("profileForm");
-if (profileForm) {
-  profileForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+    inputs.forEach(input => {
+      const key = input.previousElementSibling
+        ? input.previousElementSibling.textContent
+        : "field";
+      profile[key] = sanitizeInput(input.value);
+    });
 
-    const prefs = document
-      .getElementById("preferences")
-      .value
-      .toLowerCase()
-      .split(",")
-      .map(p => p.trim());
-
-    const users = getUsers();
-    const userIndex = users.findIndex(u => u.id == currentUser.id);
-
-    users[userIndex].preferences = prefs;
-    saveUsers(users);
-
-    document.getElementById("profileStatus").textContent = "Preferences saved!";
-    displayMatches();
+    localStorage.setItem("profile", JSON.stringify(profile));
+    alert("Profile saved securely!");
   });
 }
 
-// Match Algorithm
-function calculateMatchScore(prefs1, prefs2) {
-  return prefs1.filter(p => prefs2.includes(p)).length;
-}
+// ==============================
+// Load Saved Data
+// ==============================
 
-// Display Matches
-function displayMatches() {
-  const users = getUsers();
-  const current = getCurrentUser();
+window.addEventListener("DOMContentLoaded", () => {
+  const savedProfile = JSON.parse(localStorage.getItem("profile"));
 
-  if (!current || !current.preferences.length) return;
+  if (savedProfile) {
+    const inputs = document.querySelectorAll("input, select");
 
-  const matches = users
-    .filter(u => u.id !== current.id)
-    .map(u => ({
-      ...u,
-      score: calculateMatchScore(current.preferences, u.preferences)
-    }))
-    .sort((a, b) => b.score - a.score);
+    inputs.forEach(input => {
+      const key = input.previousElementSibling
+        ? input.previousElementSibling.textContent
+        : "";
 
-  let container = document.getElementById("matches");
-  if (!container) {
-    container = document.createElement("div");
-    container.id = "matches";
-    document.querySelector(".container").appendChild(container);
+      if (savedProfile[key]) {
+        input.value = savedProfile[key];
+      }
+    });
   }
+});
 
-  container.innerHTML = "<h3>Matches</h3>";
+// ==============================
+// UI Enhancements
+// ==============================
 
-  matches.forEach(m => {
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
-      <p><strong>${m.name}</strong></p>
-      <p>Match Score: ${m.score}</p>
-      <p>${m.preferences.join(", ")}</p>
-    `;
-    container.appendChild(div);
+// Smooth scroll
+const links = document.querySelectorAll("a[href^='#']");
+
+links.forEach(link => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
   });
-}
+});
 
-// Auto load matches
-if (window.location.pathname.includes("profile.html")) {
-  displayMatches();
-}
+// Button loading effect
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    btn.innerText = "Processing...";
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerText = "Done";
+      btn.disabled = false;
+    }, 1500);
+  });
+});
+
+// ==============================
+// Security Best Practices (Frontend)
+// ==============================
+
+// Prevent console access in production (optional)
+(function () {
+  const isDev = true; // change to false in production
+  if (!isDev) {
+    console.log = () => {};
+    console.warn = () => {};
+    console.error = () => {};
+  }
+})();
+
+// Disable right-click (basic protection)
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// Prevent key shortcuts (basic protection)
+document.addEventListener("keydown", e => {
+  if (e.ctrlKey && (e.key === "u" || e.key === "s")) {
+    e.preventDefault();
+  }
+});
+
+ 
