@@ -2,60 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RoomieMatch</title>
+  <title>Cohabify</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="container">
-    <div class="card">
-      <div class="header">
-        <h1 class="logo">RoomieMatch</h1>
-        <div class="match-badge">
-          <span class="percentage">92%</span> Match
-        </div>
-      </div>
-      
-      <div class="greeting">
-        Hi Alex! <span class="wave">🎉</span>
-      </div>
-      
-      <div class="profile">
-        <div class="avatar">
-          <span class="initials">SM</span>
-        </div>
-        <div class="info">
-          <h2 class="name">Sarah Miller, <span class="age">26</span></h2>
-          <p class="job">Graphic Designer</p>
-        </div>
-      </div>
-      
-      <div class="details">
-        <div class="location">
-          <span class="icon">📍</span> Yaounde
-        </div>
-        <div class="price">
-          <span class="icon">💰</span> 80 000frs
-        </div>
-      </div>
-      
-      <div class="preferences">
-        <h3>⭐ TOP SHARED PREFERENCES</h3>
-        <div class="chips">
-          <span class="chip">Clean Space</span>
-          <span class="chip">Quiet Hours</span>
-          <span class="chip">Pet Friendly</span>
-          <span class="chip">No Smoking</span>
-        </div>
-      </div>
-      
-      <div class="buttons">
-        <button class="reject">Reject</button>
-        <button class="accept">Accept</button>
-      </div>
-    </div>
-</main>
-<script src="script.js"></script>
 
+<body>
+
+  <!--  NAVBAR -->
+  <header class="navbar">
+    <h1 class="logo">Cohabify</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Matches</a>
+      <a href="#">Profile</a>
+    </nav>
+  </header>
+
+  <!--  MAIN LAYOUT -->
+  <div class="container">
+    <main class="layout">
+
+      <!-- LEFT SIDE (MAIN CONTENT) -->
+      <section class="main-content">
+        <div class="card">
+
+          <div class="header">
+            <div class="match-badge">
+              <span class="percentage">92%</span> Match
+            </div>
+          </div>
+
+          <div class="greeting">
+            Hi Alex! <span class="wave">🎉</span>
+          </div>
+
+          <div class="profile">
+            <div class="avatar">
+              <span class="initials"></span>
+            </div>
+            <div class="info">
+              <h2 class="name">Sarah Miller, <span class="age">26</span></h2>
+              <p class="job">Graphic Designer</p>
+            </div>
+          </div>
+
+          <div class="details">
+            <div class="location">
+              Location: Yaounde📍 
+            </div>
+            <div class="price">
+              Budget: 80 000frs💰 
+            </div>
+          </div>
+
+          <div class="preferences">
+            <h3>TOP SHARED PREFERENCES</h3>
+            <div class="chips">
+              <span class="chip">Clean Space</span>
+              <span class="chip">Quiet Hours</span>
+              <span class="chip">Pet Friendly</span>
+              <span class="chip">No Smoking</span>
+            </div>
+          </div>
+
+        <div class="buttons">
+      <button class="reject" onclick="rejectMatch()">Reject</button>
+      <button class="accept" onclick="acceptMatch()">Accept</button>
+        </div>
+
+        </div>
+      </section>
+
+      <!-- RIGHT SIDE (SIDEBAR) -->
+      <aside class="sidebar">
+        <div class="side-card">
+          <h3>Tips</h3>
+          <p>Choose roommates based on shared lifestyle preferences.</p>
+        </div>
+      </aside>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

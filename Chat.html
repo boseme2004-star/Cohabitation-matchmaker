@@ -9,11 +9,7 @@
 
 body{
   font-family:system-ui,sans-serif;
-  background:linear-gradient(135deg,#667eea,#764ba2);
   height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
 
 /* Container */
@@ -103,42 +99,62 @@ body{
   padding:10px 15px;
   border:none;
   border-radius:20px;
-  background:#667eea;
+  background:#4a89dc;
   color:#fff;
   cursor:pointer;
 }
 </style>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cohabify Chat</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="chat-container">
+<div class="main-container">
 
-  <!-- Header -->
-  <div class="chat-header">
-    <div class="avatar">E</div>
-    <div class="user-info">
-      <h3>Emily, 25</h3>
-      <p>Online</p>
+  <!-- 🔹 Sidebar -->
+  <div class="sidebar">
+    <h2>Chats</h2>
+    <div class="contact active">Emily</div>
+    <div class="contact">John</div>
+  </div>
+
+  <!-- 🔹 Chat Area -->
+  <div class="chat-area">
+
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="avatar">E</div>
+      <div class="user-info">
+        <h3>Emily, 25</h3>
+        <p>Online</p>
+      </div>
     </div>
-  </div>
 
-  <!-- Messages -->
-  <div class="chat-body">
-    <div class="message received">Hey! Are you still looking for a roommate?</div>
-    <div class="message sent">Hi! Yes I am 😊</div>
-    <div class="message received">Great! What’s your budget?</div>
-    <div class="message sent">Around $500/month</div>
-  </div>
+    <!-- Messages -->
+    <div class="chat-body" id="messages">
+      <div class="message received">Hey! Are you still looking for a roommate?</div>
+      <div class="message sent">Hi! Yes I am 😊</div>
+      <div class="message received">Great! What’s your budget?</div>
+      <div class="message sent">Around $500/month</div>
+    </div>
 
-  <!-- Input -->
-  <div class="chat-footer">
-    <input type="text" placeholder="Type a message...">
-    <button>Send</button>
+    <!-- Input -->
+    <div class="chat-footer">
+      <input type="text" id="messageInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
   </div>
 
 </div>
 
+<script src="script1.js"></script>
 </body>
 </html>
